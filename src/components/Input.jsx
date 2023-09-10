@@ -8,6 +8,8 @@ const Input = (props) => {
   useEffect(() => {
     setValue(props.value);
   }, [props.value])
+
+
   return (
     <>
 

@@ -21,6 +21,7 @@ const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpda
 
   const {
     control,
+    register,
     setValue,
     handleSubmit,
     formState: { errors, isValid },

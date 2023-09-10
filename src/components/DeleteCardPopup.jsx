@@ -13,7 +13,7 @@ const DeleteCardPopup = ({ name, title, buttonText, isOpen, onClose, onSubmit, i
 
 
   return (
-    <PopupWithForm onSubmit={handleSubmit} isOpen={isOpen} onClose={onClose} name={name} title={title} buttonText={!isLoading ? 'Сохранение...' : buttonText} />
+    <PopupWithForm isValid={true} onSubmit={handleSubmit} isOpen={isOpen} onClose={onClose} name={name} title={title} buttonText={!isLoading ? 'Сохранение...' : buttonText} />
 
   )
 }

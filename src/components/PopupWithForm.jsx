@@ -1,4 +1,5 @@
 import React from "react";
+import MyForm from "./MyForm";
 
 const PopupWithForm = ({ name, title, buttonText, children, isOpen, onClose, onSubmit, isValid }) => {
 
@@ -9,24 +10,7 @@ const PopupWithForm = ({ name, title, buttonText, children, isOpen, onClose, onS
         onClose();
       }} className={`popup popup-${name} popup-overlay ${isOpen ? 'popup__openned' : ''}`}>
         <div onClick={(e) => e.stopPropagation()} className="popup__window">
-          <form
-            onSubmit={onSubmit}
-            autoComplete="off"
-            noValidate={true}
-            name={`popup-${name}`}
-            className={`popup__form popup-${name}__form`}
-          >
-            <h2 className="popup__title">{title}</h2>
-            {children}
-            <button
-              // disabled={!isValid}
-              aria-label="Сохранить"
-              type="submit"
-              className={`popup__button popup__button-save ${isValid ? '' : 'popup__button_disabled'}`}
-            >
-              {buttonText}
-            </button>
-          </form>
+          <MyForm isValid={isValid} onSubmit={onSubmit} name={name} title={title} buttonText={buttonText} children={children} />
           <button
             onClick={(e) => {
               e.stopPropagation()
