@@ -8,7 +8,7 @@ class Api {
     this.contentType = options.headers['Content-Type'];
   }
 
-  _responseCheck(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -20,7 +20,7 @@ class Api {
       headers: {
         authorization: this.autorization,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   patchUserInfo(data) {
@@ -34,7 +34,7 @@ class Api {
         name: data.name,
         about: data.about,
       }),
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   patchUserAvatar(data) {
@@ -47,7 +47,7 @@ class Api {
       body: JSON.stringify({
         avatar: data.avatar,
       }),
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   getInitialCards() {
@@ -56,7 +56,7 @@ class Api {
         authorization: this.autorization,
         'Content-Type': this.contentType,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   postNewCard(data) {
@@ -70,7 +70,7 @@ class Api {
         name: data.name,
         link: data.link,
       }),
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteCard(item) {
@@ -80,7 +80,7 @@ class Api {
         authorization: this.autorization,
         'Content-Type': this.contentType,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   putCardLike(item) {
@@ -90,7 +90,7 @@ class Api {
         authorization: this.autorization,
         'Content-Type': this.contentType,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   deleteCardLike(item) {
@@ -100,7 +100,7 @@ class Api {
         authorization: this.autorization,
         'Content-Type': this.contentType,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   changeLikeCardStatus(item, isLiked) {

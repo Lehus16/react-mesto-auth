@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   align-items: center;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
-  border-top: 1px solid rgba(84, 84, 84, .7);
   justify-content: space-between;
 }
 
@@ -29,6 +28,6 @@
     margin: 0 0 42px 0;
     min-height: 56px;
     padding: 31.5px 0;
-
+    border-top: 1px solid rgba(84, 84, 84, .7);
   }
 }

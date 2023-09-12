@@ -1,11 +1,10 @@
 class AuthApi {
   constructor(options) {
     this.baseUrl = options.baseUrl;
-    this.autorization = options.headers.authorization;
     this.contentType = options.headers['Content-Type'];
   }
 
-  _responseCheck(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
@@ -21,7 +20,7 @@ class AuthApi {
         email: data.email,
         password: data.password,
       }),
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   signUp(data) {
@@ -34,7 +33,7 @@ class AuthApi {
         email: data.email,
         password: data.password,
       }),
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
   checkToken(token) {
@@ -44,7 +43,7 @@ class AuthApi {
         'authorization': `Bearer ${token}`,
         'Content-Type': this.contentType,
       },
-    }).then((res) => this._responseCheck(res));
+    }).then((res) => this._checkResponse(res));
   }
 
 }
