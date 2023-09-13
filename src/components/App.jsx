@@ -37,8 +37,8 @@ function App() {
   const [isPageOverlayLoading, setIsPageOverlayLoading] = useState(false);
   const [isCardDeleteLoading, setIsCardDeleteLoading] = useState(false);
   const [isAddPlaceLoading, setIsAddPlaceLoading] = useState(false);
-  const [isEditProfileLoading, setIsEditProfileLoading] = useState(true);
-  const [isEditAvatarLoading, setIsEditAvatarLoading] = useState(true);
+  const [isEditProfileLoading, setIsEditProfileLoading] = useState(false);
+  const [isEditAvatarLoading, setIsEditAvatarLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isSuccessInfoTooltipStatus, setisSuccessInfoTooltipStatus] = useState(false);
@@ -66,7 +66,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
-    setIsCardDeleteLoading(false)
+    setIsCardDeleteLoading(true)
     myApi.deleteCard(card)
       .then(() => {
         setCards((state) => state.filter((c) => c._id !== card._id));
@@ -76,14 +76,14 @@ function App() {
         console.error(err);
       })
       .finally(() => {
-        setIsCardDeleteLoading(true)
+        setIsCardDeleteLoading(false)
       })
 
   }
 
 
   function handleUpdateUser({ name, about }) {
-    setIsEditProfileLoading(false)
+    setIsEditProfileLoading(true)
     myApi.patchUserInfo({ name, about })
       .then((data) => {
         setCurrentUser(data);
@@ -93,7 +93,7 @@ function App() {
         console.error(err);
       })
       .finally(() => {
-        setIsEditProfileLoading(true)
+        setIsEditProfileLoading(false)
       })
   }
 
@@ -209,24 +209,27 @@ function App() {
           navigate('/mesto-react', { replace: true });
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         setIsAuth(false)
       })
   }
 
 
   useEffect(() => {
-    Promise.all([myApi.getUserInfo(), myApi.getInitialCards()]).then(([user, cards]) => {
-      setCurrentUser(user)
-      setCards(cards)
-    })
-      .catch((err) => {
-        console.error(err);
+    if (isAuth) {
+      Promise.all([myApi.getUserInfo(), myApi.getInitialCards()]).then(([user, cards]) => {
+        setCurrentUser(user)
+        setCards(cards)
       })
-      .finally(() => {
-        setIsPageOverlayLoading(false)
-      });
-  }, [])
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          setIsPageOverlayLoading(false)
+        });
+    }
+  }, [isAuth])
 
 
   useEffect(() => {

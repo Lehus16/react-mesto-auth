@@ -50,7 +50,7 @@ const AddPlacePopup = ({
         isOpen={isOpen}
         name={name}
         title={title}
-        buttonText={!isLoading ? "Создание..." : buttonText}
+        buttonText={isLoading ? "Создание..." : buttonText}
       >
         <Controller name={"placeName"} control={control}
           rules={{

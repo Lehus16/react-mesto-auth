@@ -36,7 +36,7 @@ const EditAvatarPopup = ({ name, title, buttonText, isOpen, onClose, onUpdateAva
 
   return (
     <FormProvider {...methods}>
-      <PopupWithForm isValid={isValid} onSubmit={handleSubmit(onSubmit)} onClose={onClose} isOpen={isOpen} name={name} title={title} buttonText={!isLoading ? 'Сохранение...' : buttonText} >
+      <PopupWithForm isValid={isValid} onSubmit={handleSubmit(onSubmit)} onClose={onClose} isOpen={isOpen} name={name} title={title} buttonText={isLoading ? 'Сохранение...' : buttonText} >
         <Controller name={'avatar'} control={control} rules={{ required: "Обязательное к заполнению поле", pattern: { value: urlRegex, message: 'Укажите URL на картинку' } }} render={({ field: { onChange, value, onBlur } }) => (
           <Input errorMessage={errors?.avatar?.message} onBlur={onBlur} onChange={onChange} value={value} name={'avatar'} placeholder={'Ссылка на картинку'} />
         )} />

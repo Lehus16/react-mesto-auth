@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 const Input = (props) => {
-
-  const [value, setValue] = useState(props.value || '');
-
-
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value])
 
 
   return (
@@ -16,10 +9,9 @@ const Input = (props) => {
       <input
         onBlur={props.onBlur}
         onChange={(e) => {
-          setValue(e.target.value);
           props.onChange && props.onChange(e);
         }}
-        value={value}
+        value={props.value}
         autoComplete="off"
         required={true}
         className={`popup__input popup__input_type_${props.name ? props.name : ''}`}

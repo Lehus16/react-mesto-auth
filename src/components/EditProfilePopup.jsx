@@ -3,13 +3,12 @@ import PopupWithForm from './PopupWithForm'
 import Input from './Input'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 import { Controller, FormProvider, useForm } from "react-hook-form";
-const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpdateUser }) => {
+const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpdateUser, isLoading }) => {
 
 
   const currentUser = useContext(CurrentUserContext)
   const [name, setName] = useState('')
   const [about, setAbout] = useState('')
-  const [isBtnLoading, setIsBtnLoading] = useState(false)
 
   const methods = useForm({
     mode: 'onChange',
@@ -21,14 +20,12 @@ const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpda
 
   const {
     control,
-    register,
     setValue,
     handleSubmit,
     formState: { errors, isValid },
     reset
   } = methods
   const onSubmit = ({ name, about }) => {
-    setIsBtnLoading(true)
     onUpdateUser({
       name: name,
       about: about,
@@ -46,9 +43,6 @@ const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpda
     reset()
     setValue('name', name)
     setValue('about', about)
-    setTimeout(() => {
-      setIsBtnLoading(false)
-    }, 500)
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen])
@@ -56,7 +50,7 @@ const EditProfilePopup = ({ formName, title, buttonText, isOpen, onClose, onUpda
 
   return (
     <FormProvider {...methods}>
-      <PopupWithForm isValid={isValid} onSubmit={handleSubmit(onSubmit)} onClose={onClose} isOpen={isOpen} name={formName} title={title} buttonText={isBtnLoading ? 'Сохранение...' : buttonText}>
+      <PopupWithForm isValid={isValid} onSubmit={handleSubmit(onSubmit)} onClose={onClose} isOpen={isOpen} name={formName} title={title} buttonText={isLoading ? 'Сохранение...' : buttonText}>
         {/* <input placeholder='Имя' className='popup__input popup__input_type_name'  {...register('name', {
         required: "Обязательное к заполнению поле",
         minLength: {

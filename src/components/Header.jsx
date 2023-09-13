@@ -3,8 +3,15 @@ import logo from "../images/Logo.svg";
 import { Link, useLocation } from "react-router-dom";
 import burger from "../images/Burger.svg";
 import close from "../images/CloseIcon.svg";
+import { Route, Routes } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../contexts/AppContext";
 
-const Header = ({ logout, userEmail, isAuth }) => {
+
+const Header = ({ logout, userEmail }) => {
+
+  const isAuth = useContext(AppContext)
+
 
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 

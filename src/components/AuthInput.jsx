@@ -1,18 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 const AuthInput = (props) => {
-
-  const [value, setValue] = useState(props.value || '');
-
-
-  useEffect(() => {
-    setValue(props.value);
-  }, [props.value])
 
 
   return (
     <>
-      <input onChange={props.onChange} value={value} name={props.name} className='register-form__input' placeholder={props.placeholder}></input>
+      <input type={props.type} onChange={props.onChange} value={props.value} name={props.name} className='register-form__input' placeholder={props.placeholder}></input>
       <span className='register-form__input-span'></span>
     </>
 

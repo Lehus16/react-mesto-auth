@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import AuthForm from './AuthForm'
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import AuthInput from './AuthInput';
 
 const Register = ({ submitHandler }) => {
+
+
+  // const hidePass = (str) => {
+  //   let result = '';
+  //   for (let i = 0; i < str.length; i++) {
+  //     result = result + '*';
+  //   }
+  //   return result
+  // }
+
+
 
   const methods = useForm({
     mode: 'onChange',
@@ -24,10 +35,8 @@ const Register = ({ submitHandler }) => {
 
   function onSubmit(data) {
     submitHandler(data)
-    reset()
+
   }
-
-
 
   return (
     <FormProvider {...methods}>
