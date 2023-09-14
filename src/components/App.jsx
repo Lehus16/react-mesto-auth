@@ -98,7 +98,7 @@ function App() {
   }
 
   function handleUpdateAvatar({ avatar }) {
-    setIsEditAvatarLoading(false)
+    setIsEditAvatarLoading(true)
     myApi.patchUserAvatar({ avatar })
       .then((data) => {
         setCurrentUser(data);
@@ -108,12 +108,12 @@ function App() {
         console.error(err);
       })
       .finally(() => {
-        setIsEditAvatarLoading(true)
+        setIsEditAvatarLoading(false)
       })
   }
 
   function handleAddPlaceSubmit({ name, link }) {
-    setIsAddPlaceLoading(false)
+    setIsAddPlaceLoading(true)
     myApi.postNewCard({ name, link })
       .then((newCard) => {
         setCards([newCard, ...cards]);
@@ -123,7 +123,7 @@ function App() {
         console.error(err);
       })
       .finally(() => {
-        setIsAddPlaceLoading(true)
+        setIsAddPlaceLoading(false)
       })
   }
 
