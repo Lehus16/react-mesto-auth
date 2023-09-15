@@ -26,18 +26,39 @@ const Header = ({ logout, userEmail }) => {
   return (
     <>
       <div className={isBurgerMenuOpen ? 'header__burger-container' : 'header__burger-container header__burger-container_closed'}>
-        {userEmail && <p className="header__email">{userEmail}</p>}
-        {isAuth ?
-          <Link to={"/sign-in"} className={'header__login header__login_logged'} onClick={logout}>Выйти</Link> :
-          <Link to={"/sign-up"} className={'header__login'}>Регистрация</Link>}
+        <Routes>
+          <Route path="sign-in" element={
+            <Link to={"/sign-up"} className={'header__login'}>Регистрация</Link>
+          } />
+          <Route path="sign-up" element={
+            <Link to={"/sign-in"} className={'header__login'}>Войти</Link>
+          } />
+          <Route path="/mesto-react" element={
+            <>
+              {userEmail && <p className="header__email">{userEmail}</p>}
+              <Link to={"/sign-in"} className={'header__login header__login_logged'} onClick={logout}>Выйти</Link>
+            </>
+          } />
+        </Routes>
       </div>
       <header className="header">
-        {/* Не понимаю как сделать через Роутер  */}
+
         <Link to={'/mesto-react'}><img className="header__logo" src={logo} alt="логотип" /></Link>
-        <div className="header__container">{userEmail && <p className="header__email">{userEmail}</p>}
-          {isAuth ?
-            <Link to={"/sign-in"} className={'header__login header__login_logged'} onClick={logout}>Выйти</Link> :
-            <Link to={"/sign-up"} className={'header__login'}>Регистрация</Link>}
+        <div className="header__container">
+          <Routes>
+            <Route path="sign-in" element={
+              <Link to={"/sign-up"} className={'header__login'}>Регистрация</Link>
+            } />
+            <Route path="sign-up" element={
+              <Link to={"/sign-in"} className={'header__login'}>Войти</Link>
+            } />
+            <Route path="/mesto-react" element={
+              <>
+                {userEmail && <p className="header__email">{userEmail}</p>}
+                <Link to={"/sign-in"} className={'header__login header__login_logged'} onClick={logout}>Выйти</Link>
+              </>
+            } />
+          </Routes>
         </div>
         <button onClick={handleBurgerMenu} className="header__burger-button"><img className="header__burger-image" src={isBurgerMenuOpen ? close : burger} alt="" /></button>
       </header>
